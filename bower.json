@@ -1,0 +1,19 @@
+{
+  "name": "h5game",
+  "version": "0.0.0",
+  "description": "h5 game",
+  "keywords": [
+    "h5"
+  ],
+  "authors": [
+    "zy"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

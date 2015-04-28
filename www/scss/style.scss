@@ -1,0 +1,136 @@
+$baseColor: #11d9bf;
+$lightBackground: #f5f5f5;
+
+html, body, h1, h2, h3, h4, div, p {
+	margin: 0;
+}
+
+
+html, body,{
+	font-size: 62.5%;	
+	//height: 100%;	
+
+	section {
+		height: 100%;
+	}
+}
+
+//app style
+.game-app {
+	height: 100%;
+
+	//header
+	.header {
+		font-size: 1.4rem;
+		color: #fff;
+		height: 44px;
+		background: #11d9bf;
+		position: fixed;
+		top: 0;
+		width: 100%;
+		z-index: 1000;
+
+		.left-nav {
+			display: inline-block;
+			position: absolute;
+			left: 0;
+		}
+		.center-nav {
+			margin: 0 48px;
+			display: block;
+			line-height: 44px;
+			text-align: center;
+		}
+		.right-nav {
+			display: inline-block;
+			position: absolute;
+			right: 0;
+		}
+	}
+
+	//footer, control bar
+	.footer {
+		position: fixed;
+		width: 100%;
+		bottom: 0;
+		height: 44px;
+		background: $baseColor;
+
+		.footer-nav-bar{
+			display: inline-block;
+			width: 25%;
+			text-align: center;
+			line-height: 44px;
+			color: #fff;
+			font-size: 1.4rem;
+		}
+	}
+}
+
+.content {
+	//margin: 44px 0;
+	//height: 100%;
+}
+
+//dashboard
+ .dashboard {
+ 	margin-top: 44px;
+ }
+
+//recommend 
+.recommend{
+	background: $lightBackground;
+	margin: 44px 0;
+	height: 100%;
+
+	&>div {
+		//height: 100% !important;
+	}
+	.app-list{
+ 	 	background: #fff;
+ 	 	position: relative;
+ 	 	display: inline-block;
+ 	 	height: 64px;
+ 	 	width: 100%;
+ 	 	margin: 8px 0 0 0;
+
+		.list-left{
+			position: absolute;
+			left: 0;
+  			width: 64px;
+ 	 		padding: 8px;
+
+ 	 		img{
+ 	 			height: 48px;
+ 	 			width: 48px;
+ 	 		}
+		}
+		.list-center{
+			display: inline-block;
+  			padding-left: 80px;
+  			padding-right: 40px;
+  			vertical-align: top;
+
+  			.app-title{
+  				font-size: 1.6rem;
+  				line-height: 1.6rem;
+  				padding-top: 0.8rem;
+  			}
+  			.app-desc{
+  				font: 1.3rem;
+  				line-height: 2rem;
+  			}
+		}
+		.list-right{
+			display: inline-block;
+  			position: absolute;
+  			top: 20px;
+  			right: 12px;
+		}
+	}
+}
+
+//category 
+.category {
+	margin-top: 44px;
+}
