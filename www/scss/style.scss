@@ -15,6 +15,55 @@ html, body,{
 	}
 }
 
+.app-list {
+	height: 64px;
+	width: 100%;
+	position: relative;
+	border-top: 1px solid #ececec;
+	border-bottom: 1px solid #ececec;
+	z-index: 10;
+
+	.list-left {
+		display: inline-block;
+		width: 64px;
+		padding: 8px;
+
+		img {
+			height: 48px;
+			width: 48px;
+		}
+	}
+
+	.list-center {	
+		display: inline-block;
+		width: 40%;
+		vertical-align: top;
+
+		.app-title {
+			margin-top: 12px;
+			font-size: 120%;
+			font-weight: 200%;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		.app-desc {
+			font-size: 12px;
+			color: #8d8d8d;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	}
+
+	.list-right {
+		display: inline-block;
+		position: absolute;
+		right: 8px;
+		top: 16px;
+	}
+}
+
 //app style
 .game-app {
 	height: 100%;
@@ -131,6 +180,42 @@ html, body,{
 }
 
 //category 
-.category {
+.category-list {
 	margin-top: 44px;
+
+	.game-card {
+		.game-title {
+			padding: 0 0 0 8px;
+
+			p {
+				margin: 0;
+				line-height: 48px;
+				font-size: 16px;
+				position: relative;
+
+				a {
+					position: absolute;
+					right: 8px;
+					color: $baseColor;
+					font-size: 14px;
+					text-decoration: none;
+				}
+			}
+		}
+		.game-app-list {
+			.list-left {
+				width: 100px;
+				height: 64px;
+
+				span {
+					display: inline-block;
+					line-height: 48px;
+					width: 28px;
+					margin-right: 8px;
+					text-align: center;
+					vertical-align: top;
+				}
+			}
+		}
+	}
 }

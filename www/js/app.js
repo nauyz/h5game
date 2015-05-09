@@ -11,6 +11,8 @@ var React = require('react');
 
 var GameApp = require('./components/GameApp.react');
 
+//初始化数据，通过action进行获取
+
 React.render(
   <GameApp />,
   document.getElementById('h5game')

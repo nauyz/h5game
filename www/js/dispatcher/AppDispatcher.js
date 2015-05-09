@@ -11,7 +11,8 @@
  * A singleton that operates as the central hub for application updates.
  */
 
-var GameStore = require('../stores/GameStore');
+var RecommendStore = require('../stores/RecommendStore');
+var CategoryStore = require('../stores/CategoryStore');
 var GameConstants = require('../constants/GameConstants')
 var Dispatcher = require('flux').Dispatcher;
 
@@ -24,15 +25,19 @@ AppDispatcher.register(function(action) {
         case GameConstants.GAME_CHANGEVIEW:
             view = action.view.trim();
             if (view !== '') {
-            	GameStore.setCurView(view);
-                GameStore.emitChange();
+            	RecommendStore.setCurView(view);
+                RecommendStore.emitChange();
             }
             break;
         case GameConstants.GAME_RECOMMEND:
             list = action.list;
-            GameStore.updateRecommendList(list);
-            GameStore.emitLoadRecommend();
+            RecommendStore.updateRecommendList(list);
+            RecommendStore.emitLoadRecommend();
             break;
+        case GameConstants.GAME_CATEGORY:
+            list = action.list;
+            CategoryStore.updateCategoryList(list);
+            CategoryStore.emitChange();
         default:
             // no op
     }

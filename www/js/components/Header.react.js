@@ -18,7 +18,7 @@ var Header = React.createClass({
     return (
       <header id="header" className="header">
         <div className="left-nav"></div>
-        <h1 className="center-nav">氢客游戏</h1>
+        <h1 className="center-nav">氢客</h1>
         <div className="right-nav"></div>
       </header>
     );

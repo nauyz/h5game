@@ -13,7 +13,7 @@ var InfiniteScroll = require('react-infinite-scroll')(React);
 var ScrollLoad = require('react-component-scrollload');
 var ViewConstants = require('../constants/ViewConstants')
 var GameActions = require('../actions/GameActions');
-var GameStore = require('../stores/GameStore');
+var RecommendStore = require('../stores/RecommendStore');
 
 var Recommend = React.createClass({
     getInitialState: function() {
@@ -25,12 +25,12 @@ var Recommend = React.createClass({
     },
 
     componentDidMount: function() {
-        GameStore.addLoadRecommendListener(this._loadMore);
+        RecommendStore.addLoadRecommendListener(this._loadMore);
         //this._handleInfiniteLoad();
     },
 
     componentWillUnmount: function() {
-        GameStore.removeLoadRecommendListener(this._loadMore);
+        RecommendStore.removeLoadRecommendListener(this._loadMore);
     },
 
     /**
@@ -121,7 +121,7 @@ var Recommend = React.createClass({
     //处理加载数据
     _loadMore: function () {
         var self = this;
-        var newList = GameStore.getCurRecommendList();        
+        var newList = RecommendStore.getCurRecommendList();        
 
         if (self.state.elements.length < 200) {
             self.setState({

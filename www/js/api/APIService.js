@@ -2,7 +2,8 @@ var $ = require('jquery');
 
 var serviceUrl = 'http://ysp-appstore.chinacloudapp.cn:8080';
 var servicePath = {
-	recommendation: '/appstore/category'
+	recommendation: '/appstore/category',
+    category: '/appstore/catalog/game'
 };
 
 var APIService = {
@@ -35,6 +36,30 @@ var APIService = {
             }
         });
         return deferred.promise();
+    },
+
+    //获取游戏分类列表
+    getGameCategory: function () {
+        var deferred = $.Deferred();
+
+        $.ajax({
+            url: serviceUrl + servicePath.category,
+            type: 'get'
+        })
+        .done(function(data) {
+            console.log("success");
+            deferred.resolve(data);
+        })
+        .fail(function(error) {
+            console.log("error");
+            deferred.reject(0);
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        
+        return deferred.promise();
+        
     }
 };
 

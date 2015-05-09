@@ -40,6 +40,21 @@ var GameActions = {
     		.fail(function () {
     			alert('get commendation failed...');
     		});
+    },
+
+    getCategory: function () {
+        APIService.getGameCategory()
+            .done(function (result) {
+                if (result.status && result.list.length > 0) {
+                    AppDispatcher.dispatch({
+                        actionType: GameConstants.GAME_CATEGORY,
+                        list: result.list
+                    });
+                }
+            })
+            .fail(function () {
+                alert('get category failed...');
+            });
     }
 };
 

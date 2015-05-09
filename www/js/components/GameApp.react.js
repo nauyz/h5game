@@ -16,7 +16,7 @@ var Footer = require('./Footer.react');
 var Header = require('./Header.react');
 var MainSection = require('./MainSection.react');
 var React = require('react');
-var GameStore = require('../stores/GameStore');
+var GameStore = require('../stores/RecommendStore');
 
 /**
  * Retrieve the current game data from the GameStore
