@@ -40,7 +40,7 @@ var Footer = React.createClass({
      */
      _onChangeView: function (view) {
         GameActions.changeView(view);
-    },
+    }
 });
 
 module.exports = Footer;

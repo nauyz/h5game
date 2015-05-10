@@ -21,7 +21,6 @@ html, body,{
 	position: relative;
 	border-top: 1px solid #ececec;
 	border-bottom: 1px solid #ececec;
-	z-index: 10;
 
 	.list-left {
 		display: inline-block;
@@ -182,6 +181,7 @@ html, body,{
 //category 
 .category-list {
 	margin-top: 44px;
+	padding-bottom: 44px;
 
 	.game-card {
 		.game-title {

@@ -13,6 +13,7 @@
 
 var RecommendStore = require('../stores/RecommendStore');
 var CategoryStore = require('../stores/CategoryStore');
+var CategoryDetailStore = require('../stores/CategoryDetailStore');
 var GameConstants = require('../constants/GameConstants')
 var Dispatcher = require('flux').Dispatcher;
 
@@ -38,6 +39,12 @@ AppDispatcher.register(function(action) {
             list = action.list;
             CategoryStore.updateCategoryList(list);
             CategoryStore.emitChange();
+            break;
+        case GameConstants.GAME_CATEGORY_DETAIL:
+            list = action.list;
+            CategoryDetailStore.updateGamesByCategory(list);
+            CategoryDetailStore.emitChange();
+            break;
         default:
             // no op
     }

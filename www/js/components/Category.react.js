@@ -8,9 +8,11 @@
  */
 
 var React = require('react');
-var ViewConstants = require('../constants/ViewConstants')
+var CategoryList = require('../components/CategoryList.react');
+var ViewConstants = require('../constants/ViewConstants');
 var GameActions = require('../actions/GameActions');
 var CategoryStore = require('../stores/CategoryStore');
+var CategoryDetailStore = require('../stores/CategoryDetailStore');
 
 
 GameActions.getCategory();
@@ -18,58 +20,77 @@ GameActions.getCategory();
 var Category = React.createClass({
     getInitialState: function() {
         return {
-            categories: CategoryStore.getCategoryList()
+            id: 0,
+            categoryView: ViewConstants.CATEGORY_VIEW,
+            categories: CategoryStore.getCategoryList(),
+            gameList: []
         };
     },
 
     componentDidMount: function() {
         CategoryStore.addChangeListener(this._onChange);
+        CategoryDetailStore.addChangeListener(this._onGotoDetail);
     },
 
     componentWillUnmount: function() {
         CategoryStore.removeChangeListener(this._onChange);
+        CategoryDetailStore.removeChangeListener(this._onGotoDetail);
     },
 
     _onChange: function () {
         this.setState({
-            categories: CategoryStore.getCategoryList()
+            gameList: CategoryDetailStore.getCategoryList()
         });
+    },
+
+    _onGotoDetail: function () {
+        this.setState({
+            gameList: CategoryDetailStore.getGamesByCategory(this.state.id)
+        });
+    },
+
+    onChangeView: function (view, id) {
+        this.setState({
+            id: id,
+            categoryView: view
+        });
+        GameActions.getGamesByCategory(id);
     },
 
     /**
         * @return {object}
     */
     render: function() {
-        var categoryList = this.state.categories.map(function (category, index) {
-            var games = category.apps;
-            var gameList = games.map(function (game, index) {
-                return (
-                    <div className="app-list game-app-list">
-                        <div className="list-left">
-                            <span className="ng-binding">{index + 1}</span>
-                            <img src={game.icon} />
-                        </div>
-                        <div className="list-center">
-                            <p className="app-title ng-binding">{game.name}</p>
-                            <p className="app-desc ng-binding">{category.name}类&nbsp;&nbsp;{game.download}人添加</p>
-                        </div>
-                        <div className="list-right">
-                        </div>
-                    </div>
-                );
-            });
-            return (
-                <div className="game-card">
-                    <div className="game-title">
-                        <p className="ng-binding">{category.name}<a ng-href="#/game/detail?index=0" href="#/game/detail?index=0">查看全部&gt;&gt;</a></p>
-                    </div>
-                    {gameList}
-                </div>
-            );
-        });
-        return (
-            <div className="category-list">{categoryList}</div>
-        );
+        var self = this;
+        var categoryList;
+        var categoryContent = null;
+
+        console.log(this.state.gameList);
+
+        switch (this.state.categoryView) {
+            case ViewConstants.CATEGORY_VIEW:
+                categoryList = this.state.categories.map(function (category, index) {
+                    return (
+                        <CategoryList 
+                            key={index}
+                            category={category} 
+                            index={index} 
+                            onChangeView={self.onChangeView}
+                        >
+                        </CategoryList>
+                    );
+                });
+
+                categoryContent = <div className="category-list">{categoryList}</div>;
+                break;
+            case ViewConstants.CATEGORY_DETAIL_VIEW:
+
+                break;
+            default:
+
+        }
+        
+        return categoryContent;
     }
 });
 

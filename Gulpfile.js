@@ -33,7 +33,7 @@ gulp.task('sass', function () {
 gulp.task('watch', function() {
     gulp.watch(paths.sass, ['sass']);
     gulp.watch(paths.js, ['browserify']);
-    gulp.watch(paths.dest, ['scripts']);
+    //gulp.watch(paths.dest, ['scripts']);
 });
 
 gulp.task('browserify', function() {

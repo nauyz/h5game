@@ -14,5 +14,6 @@ var keyMirror = require('keymirror');
 module.exports = keyMirror({
 	GAME_CHANGEVIEW: null,
 	GAME_RECOMMEND: null,
-    GAME_CATEGORY: null
+    GAME_CATEGORY: null,
+    GAME_CATEGORY_DETAIL: null
 });

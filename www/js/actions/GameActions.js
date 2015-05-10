@@ -55,6 +55,20 @@ var GameActions = {
             .fail(function () {
                 alert('get category failed...');
             });
+    },
+    getGamesByCategory: function (id) {
+        APIService.getGamesByCategory(id)
+            .done(function (result) {
+                if (result.status && result.list.length) {
+                    AppDispatcher.dispatch({
+                        actionType: GameConstants.GAME_CATEGORY_DETAIL,
+                        list: result.list
+                    })
+                }
+            })
+            .fail(function () {
+
+            });
     }
 };
 

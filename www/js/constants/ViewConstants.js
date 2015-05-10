@@ -15,5 +15,6 @@ module.exports = keyMirror({
 	DASHBOARD_VIEW: null,
 	RECOMMEND_VIEW: null,
 	CATEGORY_VIEW: null,
+	CATEGORY_DETAIL_VIEW: null,
 	SETTING_VIEW: null
 });
