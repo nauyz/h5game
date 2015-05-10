@@ -25,6 +25,14 @@ var GameActions = {
     	});
     },
 
+    //修改详情app，进入app详情
+    changeApp: function (app) {
+        AppDispatcher.dispatch({
+            actionType: GameConstants.GAME_DETAIL,
+            app: app
+        });
+    },
+
 
     getRecommend: function (start, count) {
     	APIService.getGameRecommend(start, count)

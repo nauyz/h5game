@@ -15,17 +15,22 @@ var CategoryList = React.createClass({
         * @return {object}
     */
     _onGotoCategory: function () {
-        this.props.onChangeView(ViewConstants.CATEGORY_DETAIL_VIEW, this.props.category.id);
+        this.props.onChangeView(ViewConstants.CATEGORY_DETAIL_VIEW, this.props.category.id, this.props.category.name);
+    },
+
+    _onGotoApp: function (app) {
+        this.props.onGotoApp(app);
     },
 
     render: function() {
+        var self = this;
         var category = this.props.category;
         var index = this.props.index;
 
         var games = category.apps;
         var gameList = games.map(function (game, index) {
             return (
-                <div className="app-list game-app-list">
+                <div className="app-list game-app-list" onClick={self._onGotoApp.bind(null, game)}>
                     <div className="list-left">
                         <span className="ng-binding">{index + 1}</span>
                         <img src={game.icon} />

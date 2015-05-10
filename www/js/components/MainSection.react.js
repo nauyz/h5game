@@ -12,11 +12,31 @@ var ReactPropTypes = React.PropTypes;
 var Dash = require('../components/Dash.react');
 var Recommend = require('../components/Recommend.react');
 var Category = require('../components/Category.react');
+var AppDetail = require('../components/AppDetail.react');
 var TodoActions = require('../actions/TodoActions');
 var ViewConstants = require('../constants/ViewConstants');
-var TodoItem = require('./TodoItem.react');
+var AppStore = require('../stores/AppStore');
 
 var MainSection = React.createClass({
+    getInitialState: function() {
+        return {
+            app: AppStore.getApp()
+        };
+    },
+
+    componentDidMount: function() {
+        AppStore.addChangeListener(this._onAppChange);
+    },
+
+    componentWillUnmount: function() {
+        AppStore.removeChangeListener(this._onAppChange);
+    },
+
+    _onAppChange: function () {
+        this.setState({
+            app: AppStore.getApp()
+        });
+    },
 
     // propTypes: {
     //     allTodos: ReactPropTypes.object.isRequired,
@@ -28,6 +48,7 @@ var MainSection = React.createClass({
      */
     render: function() {
         var content;
+        var app;
 
         switch (this.props.view) {
             case ViewConstants.DASHBOARD_VIEW:
@@ -42,10 +63,17 @@ var MainSection = React.createClass({
             default: 
                 content = <Dash />;
         }
+
+        if (this.state.app) {
+            app = <AppDetail app={this.state.app}></AppDetail>;
+        }
         
         return (
-            <div className="content">
-                {content}
+            <div>
+                <div className="content">
+                    {content}
+                </div>
+                {app}
             </div>
         );
     },

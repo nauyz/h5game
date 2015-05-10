@@ -76,12 +76,18 @@ html, body,{
 		position: fixed;
 		top: 0;
 		width: 100%;
-		z-index: 1000;
+		z-index: 100;
 
 		.left-nav {
 			display: inline-block;
 			position: absolute;
 			left: 0;
+
+			img {
+				width: 36px;
+				height: 36px;
+				padding: 4px 8px;
+			}
 		}
 		.center-nav {
 			margin: 0 48px;
@@ -217,5 +223,21 @@ html, body,{
 				}
 			}
 		}
+	}
+}
+
+.app-detail {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 200;
+
+	.app-iframe {
+		height: 100%;
+		width: 100%;
+		padding-bottom: 44px;
+		box-sizing: border-box;
 	}
 }

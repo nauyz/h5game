@@ -8,6 +8,7 @@
  */
 
 var React = require('react');
+var SubHeader = require('../components/SubHeader.react');
 var CategoryList = require('../components/CategoryList.react');
 var AppList = require('../components/AppList.react');
 var ViewConstants = require('../constants/ViewConstants');
@@ -50,12 +51,23 @@ var Category = React.createClass({
         });
     },
 
-    onChangeView: function (view, id) {
+    onGotoApp: function (app) {
+        GameActions.changeApp(app);
+    },
+
+    onChangeView: function (view, id, name) {
         this.setState({
             id: id,
+            categoryName: name,
             categoryView: view
         });
         GameActions.getGamesByCategory(id);
+    },
+
+    onBack: function () {
+        this.setState({
+            categoryView: ViewConstants.CATEGORY_VIEW
+        });
     },
 
     /**
@@ -74,7 +86,8 @@ var Category = React.createClass({
                         <CategoryList 
                             key={index}
                             category={category} 
-                            index={index} 
+                            index={index}
+                            onGotoApp={self.onGotoApp}
                             onChangeView={self.onChangeView}
                         >
                         </CategoryList>
@@ -85,10 +98,19 @@ var Category = React.createClass({
                 break;
             case ViewConstants.CATEGORY_DETAIL_VIEW:
                 gameList = this.state.gameList.map(function (game, index) {
-                    return <AppList item={game} index={index}></AppList>;
+                    return <AppList key={game.app_id} item={game} index={index}></AppList>;
                 });
 
-                categoryContent = <div className="category-list">{gameList}</div>;
+                categoryContent = (
+                    <div>
+                        <SubHeader
+                            title={this.state.categoryName}
+                            onBack={this.onBack}
+                        >
+                        </SubHeader>
+                        <div className="category-list">{gameList}</div>
+                    </div>
+                );
                 break;
             default:
 

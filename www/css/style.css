@@ -64,31 +64,36 @@ html, body {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000; }
+    z-index: 100; }
     /* line 81, E:/allmobilize/h5game/www/scss/style.scss */
     .game-app .header .left-nav {
       display: inline-block;
       position: absolute;
       left: 0; }
-    /* line 86, E:/allmobilize/h5game/www/scss/style.scss */
+      /* line 86, E:/allmobilize/h5game/www/scss/style.scss */
+      .game-app .header .left-nav img {
+        width: 36px;
+        height: 36px;
+        padding: 4px 8px; }
+    /* line 92, E:/allmobilize/h5game/www/scss/style.scss */
     .game-app .header .center-nav {
       margin: 0 48px;
       display: block;
       line-height: 44px;
       text-align: center; }
-    /* line 92, E:/allmobilize/h5game/www/scss/style.scss */
+    /* line 98, E:/allmobilize/h5game/www/scss/style.scss */
     .game-app .header .right-nav {
       display: inline-block;
       position: absolute;
       right: 0; }
-  /* line 100, E:/allmobilize/h5game/www/scss/style.scss */
+  /* line 106, E:/allmobilize/h5game/www/scss/style.scss */
   .game-app .footer {
     position: fixed;
     width: 100%;
     bottom: 0;
     height: 44px;
     background: #11d9bf; }
-    /* line 107, E:/allmobilize/h5game/www/scss/style.scss */
+    /* line 113, E:/allmobilize/h5game/www/scss/style.scss */
     .game-app .footer .footer-nav-bar {
       display: inline-block;
       width: 25%;
@@ -97,16 +102,16 @@ html, body {
       color: #fff;
       font-size: 1.4rem; }
 
-/* line 124, E:/allmobilize/h5game/www/scss/style.scss */
+/* line 130, E:/allmobilize/h5game/www/scss/style.scss */
 .dashboard {
   margin-top: 44px; }
 
-/* line 129, E:/allmobilize/h5game/www/scss/style.scss */
+/* line 135, E:/allmobilize/h5game/www/scss/style.scss */
 .recommend {
   background: #f5f5f5;
   margin: 44px 0;
   height: 100%; }
-  /* line 137, E:/allmobilize/h5game/www/scss/style.scss */
+  /* line 143, E:/allmobilize/h5game/www/scss/style.scss */
   .recommend .app-list {
     background: #fff;
     position: relative;
@@ -114,63 +119,63 @@ html, body {
     height: 64px;
     width: 100%;
     margin: 8px 0 0 0; }
-    /* line 145, E:/allmobilize/h5game/www/scss/style.scss */
+    /* line 151, E:/allmobilize/h5game/www/scss/style.scss */
     .recommend .app-list .list-left {
       position: absolute;
       left: 0;
       width: 64px;
       padding: 8px; }
-      /* line 151, E:/allmobilize/h5game/www/scss/style.scss */
+      /* line 157, E:/allmobilize/h5game/www/scss/style.scss */
       .recommend .app-list .list-left img {
         height: 48px;
         width: 48px; }
-    /* line 156, E:/allmobilize/h5game/www/scss/style.scss */
+    /* line 162, E:/allmobilize/h5game/www/scss/style.scss */
     .recommend .app-list .list-center {
       display: inline-block;
       padding-left: 80px;
       padding-right: 40px;
       vertical-align: top; }
-      /* line 162, E:/allmobilize/h5game/www/scss/style.scss */
+      /* line 168, E:/allmobilize/h5game/www/scss/style.scss */
       .recommend .app-list .list-center .app-title {
         font-size: 1.6rem;
         line-height: 1.6rem;
         padding-top: 0.8rem; }
-      /* line 167, E:/allmobilize/h5game/www/scss/style.scss */
+      /* line 173, E:/allmobilize/h5game/www/scss/style.scss */
       .recommend .app-list .list-center .app-desc {
         font: 1.3rem;
         line-height: 2rem; }
-    /* line 172, E:/allmobilize/h5game/www/scss/style.scss */
+    /* line 178, E:/allmobilize/h5game/www/scss/style.scss */
     .recommend .app-list .list-right {
       display: inline-block;
       position: absolute;
       top: 20px;
       right: 12px; }
 
-/* line 182, E:/allmobilize/h5game/www/scss/style.scss */
+/* line 188, E:/allmobilize/h5game/www/scss/style.scss */
 .category-list {
   margin-top: 44px;
   padding-bottom: 44px; }
-  /* line 187, E:/allmobilize/h5game/www/scss/style.scss */
+  /* line 193, E:/allmobilize/h5game/www/scss/style.scss */
   .category-list .game-card .game-title {
     padding: 0 0 0 8px; }
-    /* line 190, E:/allmobilize/h5game/www/scss/style.scss */
+    /* line 196, E:/allmobilize/h5game/www/scss/style.scss */
     .category-list .game-card .game-title p {
       margin: 0;
       line-height: 48px;
       font-size: 16px;
       position: relative; }
-      /* line 196, E:/allmobilize/h5game/www/scss/style.scss */
+      /* line 202, E:/allmobilize/h5game/www/scss/style.scss */
       .category-list .game-card .game-title p a {
         position: absolute;
         right: 8px;
         color: #11d9bf;
         font-size: 14px;
         text-decoration: none; }
-  /* line 206, E:/allmobilize/h5game/www/scss/style.scss */
+  /* line 212, E:/allmobilize/h5game/www/scss/style.scss */
   .category-list .game-card .game-app-list .list-left {
     width: 100px;
     height: 64px; }
-    /* line 210, E:/allmobilize/h5game/www/scss/style.scss */
+    /* line 216, E:/allmobilize/h5game/www/scss/style.scss */
     .category-list .game-card .game-app-list .list-left span {
       display: inline-block;
       line-height: 48px;
@@ -178,3 +183,18 @@ html, body {
       margin-right: 8px;
       text-align: center;
       vertical-align: top; }
+
+/* line 229, E:/allmobilize/h5game/www/scss/style.scss */
+.app-detail {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200; }
+  /* line 237, E:/allmobilize/h5game/www/scss/style.scss */
+  .app-detail .app-iframe {
+    height: 100%;
+    width: 100%;
+    padding-bottom: 44px;
+    box-sizing: border-box; }

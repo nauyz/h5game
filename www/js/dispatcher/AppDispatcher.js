@@ -14,13 +14,14 @@
 var RecommendStore = require('../stores/RecommendStore');
 var CategoryStore = require('../stores/CategoryStore');
 var CategoryDetailStore = require('../stores/CategoryDetailStore');
+var AppStore = require('../stores/AppStore');
 var GameConstants = require('../constants/GameConstants')
 var Dispatcher = require('flux').Dispatcher;
 
 // Register callback to handle all updates
 var AppDispatcher = new Dispatcher();
 AppDispatcher.register(function(action) {
-    var view;
+    var view, list;
 
     switch(action.actionType) {
         case GameConstants.GAME_CHANGEVIEW:
@@ -29,6 +30,11 @@ AppDispatcher.register(function(action) {
             	RecommendStore.setCurView(view);
                 RecommendStore.emitChange();
             }
+            break;
+        case GameConstants.GAME_DETAIL:
+            var app = action.app;
+            AppStore.updateApp(app);
+            AppStore.emitChange();
             break;
         case GameConstants.GAME_RECOMMEND:
             list = action.list;
