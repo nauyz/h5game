@@ -8,6 +8,7 @@
  */
 
 var React = require('react');
+var AppList = require('../components/AppList.react');
 var Infinite = require('react-infinite');
 var InfiniteScroll = require('react-infinite-scroll')(React);
 var ScrollLoad = require('react-component-scrollload');
@@ -37,22 +38,9 @@ var Recommend = React.createClass({
      * @return {object}
      */
     render: function() {
-        var listElements = this.state.elements.map(function(item, i) {
-            return (
-                <div className="app-list" key={item.app_id}>
-                    <div className="list-left"><img src={item.icon} /></div>
-                    <div className="list-center">
-                        <p className="app-title ng-binding">{item.name}</p>
-                        <p className="app-desc ng-binding">休闲游戏类&nbsp;&nbsp;{item.download}人添加</p>
-                    </div>
-                    <div className="list-right">
-                        <button className="app-add" onClick="">添加</button>
-                    </div>
-                </div>
-            );
+        var listElements = this.state.elements.map(function(item, index) {
+            return <AppList item={item} index={index}></AppList>;
         });
-        console.log(this.state.elements);
-
         // return (
         //     <div className="recommend">
         //         <ScrollLoad 
@@ -108,7 +96,6 @@ var Recommend = React.createClass({
         var start = this.state.elements.length;
         var pageSize = 40;
 
-        console.log(this.state.hasMore);
         self.setState({
             hasMore: false,
             isInfiniteLoading: true

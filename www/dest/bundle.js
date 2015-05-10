@@ -21,7 +21,7 @@ React.render(
 
 
 
-},{"./components/GameApp.react":175,"react":167}],2:[function(require,module,exports){
+},{"./components/GameApp.react":176,"react":167}],2:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -29286,7 +29286,7 @@ module.exports = GameActions;
 
 
 
-},{"../api/APIService":170,"../constants/GameConstants":181,"../dispatcher/AppDispatcher":184}],169:[function(require,module,exports){
+},{"../api/APIService":170,"../constants/GameConstants":182,"../dispatcher/AppDispatcher":185}],169:[function(require,module,exports){
 /*
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -29378,7 +29378,7 @@ module.exports = TodoActions;
 
 
 
-},{"../constants/TodoConstants":182,"../dispatcher/AppDispatcher":184}],170:[function(require,module,exports){
+},{"../constants/TodoConstants":183,"../dispatcher/AppDispatcher":185}],170:[function(require,module,exports){
 var $ = require('jquery');
 
 var serviceUrl = 'http://ysp-appstore.chinacloudapp.cn:8080';
@@ -29480,8 +29480,49 @@ module.exports = APIService;
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
+var React = require('react'); 
+var ViewConstants = require('../constants/ViewConstants');
+
+var AppList = React.createClass({displayName: "AppList",
+    /**
+        * @return {object}
+    */
+    render: function() {
+        var item = this.props.item;
+        var index = this.props.item;
+        
+        return (
+           	React.createElement("div", {className: "app-list", key: item.app_id}, 
+	            React.createElement("div", {className: "list-left"}, React.createElement("img", {src: item.icon})), 
+	            React.createElement("div", {className: "list-center"}, 
+	                React.createElement("p", {className: "app-title ng-binding"}, item.name), 
+	                React.createElement("p", {className: "app-desc ng-binding"}, "休闲游戏类  ", item.download, "人添加")
+	            ), 
+	            React.createElement("div", {className: "list-right"}, 
+	                React.createElement("button", {className: "app-add", onClick: ""}, "添加")
+	            )
+	        )
+        );
+    }
+});
+
+module.exports = AppList;
+
+
+
+},{"../constants/ViewConstants":184,"react":167}],172:[function(require,module,exports){
+/**
+ * Copyright (c) 2014-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
 var React = require('react');
 var CategoryList = require('../components/CategoryList.react');
+var AppList = require('../components/AppList.react');
 var ViewConstants = require('../constants/ViewConstants');
 var GameActions = require('../actions/GameActions');
 var CategoryStore = require('../stores/CategoryStore');
@@ -29537,8 +29578,7 @@ var Category = React.createClass({displayName: "Category",
         var self = this;
         var categoryList;
         var categoryContent = null;
-
-        console.log(this.state.gameList);
+        var gameList;
 
         switch (this.state.categoryView) {
             case ViewConstants.CATEGORY_VIEW:
@@ -29557,7 +29597,11 @@ var Category = React.createClass({displayName: "Category",
                 categoryContent = React.createElement("div", {className: "category-list"}, categoryList);
                 break;
             case ViewConstants.CATEGORY_DETAIL_VIEW:
+                gameList = this.state.gameList.map(function (game, index) {
+                    return React.createElement(AppList, {item: game, index: index});
+                });
 
+                categoryContent = React.createElement("div", {className: "category-list"}, gameList);
                 break;
             default:
 
@@ -29571,7 +29615,7 @@ module.exports = Category;
 
 
 
-},{"../actions/GameActions":168,"../components/CategoryList.react":172,"../constants/ViewConstants":183,"../stores/CategoryDetailStore":185,"../stores/CategoryStore":186,"react":167}],172:[function(require,module,exports){
+},{"../actions/GameActions":168,"../components/AppList.react":171,"../components/CategoryList.react":173,"../constants/ViewConstants":184,"../stores/CategoryDetailStore":186,"../stores/CategoryStore":187,"react":167}],173:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -29631,7 +29675,7 @@ module.exports = CategoryList;
 
 
 
-},{"../constants/ViewConstants":183,"react":167}],173:[function(require,module,exports){
+},{"../constants/ViewConstants":184,"react":167}],174:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -29658,7 +29702,7 @@ module.exports = Dashboard;
 
 
 
-},{"react":167}],174:[function(require,module,exports){
+},{"react":167}],175:[function(require,module,exports){
 /**
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -29708,7 +29752,7 @@ module.exports = Footer;
 
 
 
-},{"../actions/GameActions":168,"../constants/ViewConstants":183,"react":167}],175:[function(require,module,exports){
+},{"../actions/GameActions":168,"../constants/ViewConstants":184,"react":167}],176:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -29779,7 +29823,7 @@ module.exports = GameApp;
 
 
 
-},{"../stores/RecommendStore":187,"./Footer.react":174,"./Header.react":176,"./MainSection.react":177,"react":167}],176:[function(require,module,exports){
+},{"../stores/RecommendStore":188,"./Footer.react":175,"./Header.react":177,"./MainSection.react":178,"react":167}],177:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -29793,39 +29837,25 @@ var React = require('react');
 
 var Header = React.createClass({displayName: "Header",
 
-  /**
-   * @return {object}
-   */
-  render: function() {
-    return (
-      React.createElement("header", {id: "header", className: "header"}, 
-        React.createElement("div", {className: "left-nav"}), 
-        React.createElement("h1", {className: "center-nav"}, "氢客"), 
-        React.createElement("div", {className: "right-nav"})
-      )
-    );
-  },
-
-  /**
-   * Event handler called within TodoTextInput.
-   * Defining this here allows TodoTextInput to be used in multiple places
-   * in different ways.
-   * @param {string} text
-   */
-  _onSave: function(text) {
-    if (text.trim()){
-      //TodoActions.create(text);
+    /**
+     * @return {object}
+     */
+    render: function() {
+        return (
+            React.createElement("header", {id: "header", className: "header"}, 
+                React.createElement("div", {className: "left-nav"}), 
+                React.createElement("h1", {className: "center-nav"}, "氢客"), 
+                React.createElement("div", {className: "right-nav"})
+            )
+        );
     }
-
-  }
-
 });
 
 module.exports = Header;
 
 
 
-},{"react":167}],177:[function(require,module,exports){
+},{"react":167}],178:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -29891,7 +29921,7 @@ module.exports = MainSection;
 
 
 
-},{"../actions/TodoActions":169,"../components/Category.react":171,"../components/Dash.react":173,"../components/Recommend.react":178,"../constants/ViewConstants":183,"./TodoItem.react":179,"react":167}],178:[function(require,module,exports){
+},{"../actions/TodoActions":169,"../components/Category.react":172,"../components/Dash.react":174,"../components/Recommend.react":179,"../constants/ViewConstants":184,"./TodoItem.react":180,"react":167}],179:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -29902,6 +29932,7 @@ module.exports = MainSection;
  */
 
 var React = require('react');
+var AppList = require('../components/AppList.react');
 var Infinite = require('react-infinite');
 var InfiniteScroll = require('react-infinite-scroll')(React);
 var ScrollLoad = require('react-component-scrollload');
@@ -29931,22 +29962,9 @@ var Recommend = React.createClass({displayName: "Recommend",
      * @return {object}
      */
     render: function() {
-        var listElements = this.state.elements.map(function(item, i) {
-            return (
-                React.createElement("div", {className: "app-list", key: item.app_id}, 
-                    React.createElement("div", {className: "list-left"}, React.createElement("img", {src: item.icon})), 
-                    React.createElement("div", {className: "list-center"}, 
-                        React.createElement("p", {className: "app-title ng-binding"}, item.name), 
-                        React.createElement("p", {className: "app-desc ng-binding"}, "休闲游戏类  ", item.download, "人添加")
-                    ), 
-                    React.createElement("div", {className: "list-right"}, 
-                        React.createElement("button", {className: "app-add", onClick: ""}, "添加")
-                    )
-                )
-            );
+        var listElements = this.state.elements.map(function(item, index) {
+            return React.createElement(AppList, {item: item, index: index});
         });
-        console.log(this.state.elements);
-
         // return (
         //     <div className="recommend">
         //         <ScrollLoad 
@@ -30002,7 +30020,6 @@ var Recommend = React.createClass({displayName: "Recommend",
         var start = this.state.elements.length;
         var pageSize = 40;
 
-        console.log(this.state.hasMore);
         self.setState({
             hasMore: false,
             isInfiniteLoading: true
@@ -30042,7 +30059,7 @@ module.exports = Recommend;
 
 
 
-},{"../actions/GameActions":168,"../constants/ViewConstants":183,"../stores/RecommendStore":187,"react":167,"react-component-scrollload":10,"react-infinite":19,"react-infinite-scroll":12}],179:[function(require,module,exports){
+},{"../actions/GameActions":168,"../components/AppList.react":171,"../constants/ViewConstants":184,"../stores/RecommendStore":188,"react":167,"react-component-scrollload":10,"react-infinite":19,"react-infinite-scroll":12}],180:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -30145,7 +30162,7 @@ module.exports = TodoItem;
 
 
 
-},{"../actions/TodoActions":169,"./TodoTextInput.react":180,"react":167,"react/lib/cx":125}],180:[function(require,module,exports){
+},{"../actions/TodoActions":169,"./TodoTextInput.react":181,"react":167,"react/lib/cx":125}],181:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -30229,7 +30246,7 @@ module.exports = TodoTextInput;
 
 
 
-},{"react":167}],181:[function(require,module,exports){
+},{"react":167}],182:[function(require,module,exports){
 /*
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -30252,7 +30269,7 @@ module.exports = keyMirror({
 
 
 
-},{"keymirror":8}],182:[function(require,module,exports){
+},{"keymirror":8}],183:[function(require,module,exports){
 /*
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -30278,7 +30295,7 @@ module.exports = keyMirror({
 
 
 
-},{"keymirror":8}],183:[function(require,module,exports){
+},{"keymirror":8}],184:[function(require,module,exports){
 /*
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -30302,7 +30319,7 @@ module.exports = keyMirror({
 
 
 
-},{"keymirror":8}],184:[function(require,module,exports){
+},{"keymirror":8}],185:[function(require,module,exports){
 /*
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -30359,7 +30376,7 @@ module.exports = AppDispatcher;
 
 
 
-},{"../constants/GameConstants":181,"../stores/CategoryDetailStore":185,"../stores/CategoryStore":186,"../stores/RecommendStore":187,"flux":4}],185:[function(require,module,exports){
+},{"../constants/GameConstants":182,"../stores/CategoryDetailStore":186,"../stores/CategoryStore":187,"../stores/RecommendStore":188,"flux":4}],186:[function(require,module,exports){
 /*
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -30413,7 +30430,7 @@ module.exports = CategoryDetailStore;
 
 
 
-},{"../constants/ViewConstants":183,"events":2,"object-assign":9}],186:[function(require,module,exports){
+},{"../constants/ViewConstants":184,"events":2,"object-assign":9}],187:[function(require,module,exports){
 /*
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -30467,7 +30484,7 @@ module.exports = CategoryStore;
 
 
 
-},{"../constants/ViewConstants":183,"events":2,"object-assign":9}],187:[function(require,module,exports){
+},{"../constants/ViewConstants":184,"events":2,"object-assign":9}],188:[function(require,module,exports){
 /*
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -30551,4 +30568,4 @@ module.exports = GameStore;
 
 
 
-},{"../constants/ViewConstants":183,"events":2,"object-assign":9}]},{},[1]);
+},{"../constants/ViewConstants":184,"events":2,"object-assign":9}]},{},[1]);

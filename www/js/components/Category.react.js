@@ -9,6 +9,7 @@
 
 var React = require('react');
 var CategoryList = require('../components/CategoryList.react');
+var AppList = require('../components/AppList.react');
 var ViewConstants = require('../constants/ViewConstants');
 var GameActions = require('../actions/GameActions');
 var CategoryStore = require('../stores/CategoryStore');
@@ -64,8 +65,7 @@ var Category = React.createClass({
         var self = this;
         var categoryList;
         var categoryContent = null;
-
-        console.log(this.state.gameList);
+        var gameList;
 
         switch (this.state.categoryView) {
             case ViewConstants.CATEGORY_VIEW:
@@ -84,7 +84,11 @@ var Category = React.createClass({
                 categoryContent = <div className="category-list">{categoryList}</div>;
                 break;
             case ViewConstants.CATEGORY_DETAIL_VIEW:
+                gameList = this.state.gameList.map(function (game, index) {
+                    return <AppList item={game} index={index}></AppList>;
+                });
 
+                categoryContent = <div className="category-list">{gameList}</div>;
                 break;
             default:
 
