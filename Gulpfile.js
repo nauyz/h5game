@@ -26,7 +26,7 @@ gulp.task('sass', function () {
         sourceComments : 'normal'
     }))
     .pipe(gulp.dest('./www/css/'))
-    .pipe(livereload());
+    //.pipe(livereload());
 });
 
 

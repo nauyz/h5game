@@ -36,6 +36,10 @@ AppDispatcher.register(function(action) {
             AppStore.updateApp(app);
             AppStore.emitChange();
             break;
+        case GameConstants.GAME_DETAIL_REMOVE:
+            AppStore.deleteApp();
+            AppStore.emitChange();
+            break;
         case GameConstants.GAME_RECOMMEND:
             list = action.list;
             RecommendStore.updateRecommendList(list);

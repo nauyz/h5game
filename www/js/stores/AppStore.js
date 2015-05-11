@@ -26,6 +26,9 @@ var AppStore = assign({}, EventEmitter.prototype, {
     _app = app;
   },
 
+  deleteApp: function () {
+    _app = null;
+  },
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },

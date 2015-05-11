@@ -49,6 +49,7 @@ var MainSection = React.createClass({
     render: function() {
         var content;
         var app;
+        var section;
 
         switch (this.props.view) {
             case ViewConstants.DASHBOARD_VIEW:
@@ -65,17 +66,22 @@ var MainSection = React.createClass({
         }
 
         if (this.state.app) {
-            app = <AppDetail app={this.state.app}></AppDetail>;
+            section = (
+                <div>
+                    <AppDetail app={this.state.app}></AppDetail>;
+                </div>
+            );
+        } else {
+            section = (
+                <div>
+                    <div className="content">
+                        {content}
+                    </div>
+                </div>
+            );
         }
         
-        return (
-            <div>
-                <div className="content">
-                    {content}
-                </div>
-                {app}
-            </div>
-        );
+        return section;
     },
 
     /**

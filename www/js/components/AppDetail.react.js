@@ -8,8 +8,12 @@
  */
 
 var React = require('react');
+var GameActions = require('../actions/GameActions');
 
 var AppDetail = React.createClass({
+    _goBack: function () {
+        GameActions.deleteApp();
+    },
     /**
      * @return {object}
      */
@@ -21,7 +25,12 @@ var AppDetail = React.createClass({
         return (
             <div className="app-detail">
                 <iframe src={app.url} className="app-iframe"></iframe>
-                <div className=""></div>
+                <div className="app-option-list">
+                    <div className="app-option" onClick={this._goBack}>返回</div>
+                    <div className="app-option">首页</div>
+                    <div className="app-option">分享</div>
+                    <div className="app-option">更多</div>
+                </div>
             </div>
         );
     }

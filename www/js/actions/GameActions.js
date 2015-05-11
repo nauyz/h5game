@@ -32,6 +32,11 @@ var GameActions = {
             app: app
         });
     },
+    deleteApp: function () {
+        AppDispatcher.dispatch({
+            actionType: GameConstants.GAME_DETAIL
+        })
+    },
 
 
     getRecommend: function (start, count) {

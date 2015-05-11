@@ -9,8 +9,13 @@
 
 var React = require('react'); 
 var ViewConstants = require('../constants/ViewConstants');
+var GameActions = require('../actions/GameActions');
 
-var AppList = React.createClass({
+var AppList = React.createClass({    
+    _onGotoApp: function (app) {
+        GameActions.changeApp(app);
+    },
+
     /**
         * @return {object}
     */
@@ -19,7 +24,7 @@ var AppList = React.createClass({
         var index = this.props.item;
         
         return (
-           	<div className="app-list" key={item.app_id}>
+           	<div className="app-list" key={item.app_id} onClick={this._onGotoApp.bind(null, item)}>
 	            <div className="list-left"><img src={item.icon} /></div>
 	            <div className="list-center">
 	                <p className="app-title ng-binding">{item.name}</p>

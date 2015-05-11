@@ -29203,6 +29203,11 @@ var GameActions = {
             app: app
         });
     },
+    deleteApp: function () {
+        AppDispatcher.dispatch({
+            actionType: GameConstants.GAME_DETAIL
+        })
+    },
 
 
     getRecommend: function (start, count) {
@@ -29450,8 +29455,12 @@ module.exports = APIService;
  */
 
 var React = require('react');
+var GameActions = require('../actions/GameActions');
 
 var AppDetail = React.createClass({displayName: "AppDetail",
+    _goBack: function () {
+        GameActions.deleteApp();
+    },
     /**
      * @return {object}
      */
@@ -29463,7 +29472,12 @@ var AppDetail = React.createClass({displayName: "AppDetail",
         return (
             React.createElement("div", {className: "app-detail"}, 
                 React.createElement("iframe", {src: app.url, className: "app-iframe"}), 
-                React.createElement("div", {className: ""})
+                React.createElement("div", {className: "app-option-list"}, 
+                    React.createElement("div", {className: "app-option", onClick: this._goBack}, "返回"), 
+                    React.createElement("div", {className: "app-option"}, "首页"), 
+                    React.createElement("div", {className: "app-option"}, "分享"), 
+                    React.createElement("div", {className: "app-option"}, "更多")
+                )
             )
         );
     }
@@ -29473,7 +29487,7 @@ module.exports = AppDetail;
 
 
 
-},{"react":166}],171:[function(require,module,exports){
+},{"../actions/GameActions":167,"react":166}],171:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -29485,8 +29499,13 @@ module.exports = AppDetail;
 
 var React = require('react'); 
 var ViewConstants = require('../constants/ViewConstants');
+var GameActions = require('../actions/GameActions');
 
-var AppList = React.createClass({displayName: "AppList",
+var AppList = React.createClass({displayName: "AppList",    
+    _onGotoApp: function (app) {
+        GameActions.changeApp(app);
+    },
+
     /**
         * @return {object}
     */
@@ -29495,7 +29514,7 @@ var AppList = React.createClass({displayName: "AppList",
         var index = this.props.item;
         
         return (
-           	React.createElement("div", {className: "app-list", key: item.app_id}, 
+           	React.createElement("div", {className: "app-list", key: item.app_id, onClick: this._onGotoApp.bind(null, item)}, 
 	            React.createElement("div", {className: "list-left"}, React.createElement("img", {src: item.icon})), 
 	            React.createElement("div", {className: "list-center"}, 
 	                React.createElement("p", {className: "app-title ng-binding"}, item.name), 
@@ -29513,7 +29532,7 @@ module.exports = AppList;
 
 
 
-},{"../constants/ViewConstants":183,"react":166}],172:[function(require,module,exports){
+},{"../actions/GameActions":167,"../constants/ViewConstants":183,"react":166}],172:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -29937,6 +29956,7 @@ var MainSection = React.createClass({displayName: "MainSection",
     render: function() {
         var content;
         var app;
+        var section;
 
         switch (this.props.view) {
             case ViewConstants.DASHBOARD_VIEW:
@@ -29953,17 +29973,22 @@ var MainSection = React.createClass({displayName: "MainSection",
         }
 
         if (this.state.app) {
-            app = React.createElement(AppDetail, {app: this.state.app});
+            section = (
+                React.createElement("div", null, 
+                    React.createElement(AppDetail, {app: this.state.app}), ";"
+                )
+            );
+        } else {
+            section = (
+                React.createElement("div", null, 
+                    React.createElement("div", {className: "content"}, 
+                        content
+                    )
+                )
+            );
         }
         
-        return (
-            React.createElement("div", null, 
-                React.createElement("div", {className: "content"}, 
-                    content
-                ), 
-                app
-            )
-        );
+        return section;
     },
 
     /**
@@ -30172,6 +30197,7 @@ var keyMirror = require('keymirror');
 module.exports = keyMirror({
 	GAME_CHANGEVIEW: null,
 	GAME_DETAIL: null, 	//app详情页面
+	GAME_DETAIL_REMOVE: null, //删除当前app
 	GAME_RECOMMEND: null,
     GAME_CATEGORY: null,
     GAME_CATEGORY_DETAIL: null
@@ -30268,6 +30294,10 @@ AppDispatcher.register(function(action) {
             AppStore.updateApp(app);
             AppStore.emitChange();
             break;
+        case GameConstants.GAME_DETAIL_REMOVE:
+            AppStore.deleteApp();
+            AppStore.emitChange();
+            break;
         case GameConstants.GAME_RECOMMEND:
             list = action.list;
             RecommendStore.updateRecommendList(list);
@@ -30321,6 +30351,9 @@ var AppStore = assign({}, EventEmitter.prototype, {
     _app = app;
   },
 
+  deleteApp: function () {
+    _app = null;
+  },
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },

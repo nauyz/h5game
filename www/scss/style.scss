@@ -239,5 +239,25 @@ html, body,{
 		width: 100%;
 		padding-bottom: 44px;
 		box-sizing: border-box;
+		border: 0px;
+	}
+
+	.app-option-list {
+		position: fixed;
+		bottom: 0;
+		height: 44px;
+		width: 100%;
+		font-size: 0;
+		background: $baseColor;
+
+		.app-option {
+			display: inline-block;
+			width: 25%;
+			font-size: 1.4rem;
+			text-align: center;
+			line-height: 44px;
+			font-size: 1.4rem;
+			color: #fff;
+		}
 	}
 }
